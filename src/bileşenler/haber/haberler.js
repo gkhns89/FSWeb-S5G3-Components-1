@@ -103,7 +103,7 @@ const data = [
 
     <button class="expandButton">+</button>
   </div>
-
+  
   Adım 2: Hala `haberYapici` içindeyiz, button.expandButton 'a bir click event dinleyici ekleyin.
   Bu dinleyici div.article öğesine 'article-open' class'ını ekleyip/çıkaracak (toogle).
 
@@ -115,3 +115,46 @@ const data = [
   Adım 5: Veri dizisine yeni haber nesnesi eklemeyi deneyin. Diğer verilerle aynı yapıda olmasına dikkat edin.
   Eklediğiniz yeni haberi görmek için sayfayı yenileyin.
 */
+const haberYapici = function (dataBaseArr) {
+  const container = document.createElement("div");
+  container.className = "article";
+
+  const h2JS = document.createElement("h2");
+  h2JS.textContent = dataBaseArr.baslik;
+  container.appendChild(h2JS);
+
+  const baslikJS = document.createElement("p");
+  baslikJS.className = "tarih";
+  baslikJS.textContent = dataBaseArr.tarih;
+  container.appendChild(baslikJS);
+
+  const pjsBir = document.createElement("p");
+  pjsBir.textContent = dataBaseArr.ilkParagraf;
+  container.appendChild(pjsBir);
+
+  const pjsIki = document.createElement("p");
+  pjsIki.textContent = dataBaseArr.ikinciParagraf;
+  container.appendChild(pjsIki);
+
+  const pjsUc = document.createElement("p");
+  pjsUc.textContent = dataBaseArr.ucuncuParagraf;
+  container.appendChild(pjsUc);
+
+  const buttonjs = document.createElement("span");
+  buttonjs.style.fontSize = "40px";
+  buttonjs.className = "expandButton";
+  buttonjs.textContent = "+";
+
+  buttonjs.addEventListener("click", () => {
+    container.classList.toggle("article-open");
+  });
+  container.appendChild(buttonjs);
+
+  return container;
+};
+
+const articleSection = document.querySelector(".articles");
+
+data.forEach((item) => {
+  articleSection.append(haberYapici(item));
+});
